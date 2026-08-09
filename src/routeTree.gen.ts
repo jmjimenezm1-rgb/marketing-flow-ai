@@ -15,6 +15,7 @@ import { Route as CampanasIndexRouteImport } from './routes/campanas.index'
 import { Route as CampanasIdRouteImport } from './routes/campanas.$id'
 import { Route as CampanasNuevaRouteImport } from './routes/campanas.nueva'
 import { Route as RevisionIndexRouteImport } from './routes/revision.index'
+import { Route as RevisionIdRouteImport } from './routes/revision.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,12 +47,18 @@ const RevisionIndexRoute = RevisionIndexRouteImport.update({
   path: '/revision/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RevisionIdRoute = RevisionIdRouteImport.update({
+  id: '/revision/$id',
+  path: '/revision/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/generador': typeof GeneradorRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
+  '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
   '/revision/': typeof RevisionIndexRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/generador': typeof GeneradorRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
+  '/revision/$id': typeof RevisionIdRoute
   '/campanas': typeof CampanasIndexRoute
   '/revision': typeof RevisionIndexRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/generador': typeof GeneradorRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
+  '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
   '/revision/': typeof RevisionIndexRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/generador'
     | '/campanas/$id'
     | '/campanas/nueva'
+    | '/revision/$id'
     | '/campanas/'
     | '/revision/'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/generador'
     | '/campanas/$id'
     | '/campanas/nueva'
+    | '/revision/$id'
     | '/campanas'
     | '/revision'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/generador'
     | '/campanas/$id'
     | '/campanas/nueva'
+    | '/revision/$id'
     | '/campanas/'
     | '/revision/'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   GeneradorRoute: typeof GeneradorRoute
   CampanasIdRoute: typeof CampanasIdRoute
   CampanasNuevaRoute: typeof CampanasNuevaRoute
+  RevisionIdRoute: typeof RevisionIdRoute
   CampanasIndexRoute: typeof CampanasIndexRoute
   RevisionIndexRoute: typeof RevisionIndexRoute
 }
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RevisionIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/revision/$id': {
+      id: '/revision/$id'
+      path: '/revision/$id'
+      fullPath: '/revision/$id'
+      preLoaderRoute: typeof RevisionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   GeneradorRoute: GeneradorRoute,
   CampanasIdRoute: CampanasIdRoute,
   CampanasNuevaRoute: CampanasNuevaRoute,
+  RevisionIdRoute: RevisionIdRoute,
   CampanasIndexRoute: CampanasIndexRoute,
   RevisionIndexRoute: RevisionIndexRoute,
 }
