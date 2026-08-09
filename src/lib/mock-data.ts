@@ -116,8 +116,8 @@ export type MensajeGenerado = {
   tipoMensaje: string;
   tono: string;
   idioma: string;
-  asunto?: string;
-  preheader?: string;
+  asunto: string | null;
+  preheader: string | null;
   cuerpo: string;
   cuerpoOriginal: string;
   nivelPersonalizacion: "generico" | "medio" | "alto";
@@ -131,7 +131,7 @@ export type MensajeGenerado = {
   version: number;
   historial: { fecha: string; usuario: string; accion: string; texto?: string }[];
   motivoPersonalizacion: string;
-  variante?: "A" | "B";
+  variante: "A" | "B" | null;
 };
 
 const hoy = new Date();
@@ -438,8 +438,8 @@ export const mensajes: MensajeGenerado[] = (() => {
         tipoMensaje: "Mensaje inicial",
         tono: "consultivo",
         idioma: "es",
-        asunto: canal === "email" ? `${producto.nombre} para ${cliente.razonSocial}` : undefined,
-        preheader: canal === "email" ? producto.descripcionCorta : undefined,
+        asunto: canal === "email" ? `${producto.nombre} para ${cliente.razonSocial}` : null,
+        preheader: canal === "email" ? producto.descripcionCorta : null,
         cuerpo,
         cuerpoOriginal: cuerpo,
         nivelPersonalizacion: cliente.persona === "—" ? "generico" : i % 2 === 0 ? "alto" : "medio",
@@ -460,6 +460,7 @@ export const mensajes: MensajeGenerado[] = (() => {
         autor: "IA · marketinghub-gen-1 (simulado)",
         version: 1,
         historial: [{ fecha: iso(-2), usuario: "IA", accion: "Generación inicial" }],
+        variante: null,
         motivoPersonalizacion:
           cliente.persona === "—"
             ? "Sin datos de persona de contacto verificados: se genera mensaje genérico sin inventar información."
