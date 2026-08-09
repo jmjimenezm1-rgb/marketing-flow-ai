@@ -135,7 +135,7 @@ function RevisionPage() {
       </div>
 
       <div className="mt-4 overflow-x-auto rounded-xl border bg-card shadow-panel">
-        <table className="w-full min-w-[1080px] text-sm">
+        <table className="w-full min-w-[1320px] text-sm">
           <thead className="bg-muted/60 text-left text-xs uppercase text-muted-foreground">
             <tr>
               <th className="px-4 py-3">Cliente</th>
@@ -156,11 +156,11 @@ function RevisionPage() {
               const prod = productos.find((p) => p.id === m.productoId);
               return (
                 <tr key={m.id} className="align-top hover:bg-muted/40">
-                  <td className="px-4 py-3">
+                  <td className="whitespace-nowrap px-4 py-3">
                     <p className="font-medium">{c.razonSocial}</p>
                     <p className="text-xs text-muted-foreground">{c.persona} · {c.cargo}</p>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="whitespace-nowrap px-4 py-3">
                     <p>{camp?.nombre}</p>
                     <p className="text-xs text-muted-foreground">{prod?.nombre}</p>
                   </td>
@@ -174,26 +174,26 @@ function RevisionPage() {
                   <td className="px-4 py-3"><StatusBadge value={m.estado} /></td>
                   <td className="px-4 py-3 text-xs">{m.fechaPrevistaEnvio ? m.fechaPrevistaEnvio.slice(0, 10) : "—"}</td>
                   <td className="px-4 py-3">
-                    <div className="flex flex-wrap justify-end gap-1">
-                      <Button size="sm" variant="outline" asChild title="Ver detalle">
+                    <div className="flex flex-nowrap justify-end gap-1">
+                      <Button size="icon" variant="outline" asChild title="Ver detalle">
                         <Link to="/revision/$id" params={{ id: m.id }}><Eye className="size-4" /></Link>
                       </Button>
-                      <Button size="sm" variant="outline" title="Aprobar" onClick={() => accion(m.id, "aprobado", "Mensaje aprobado")}>
+                      <Button size="icon" variant="outline" title="Aprobar" onClick={() => accion(m.id, "aprobado", "Mensaje aprobado")}>
                         <Check className="size-4" />
                       </Button>
-                      <Button size="sm" variant="outline" title="Rechazar" onClick={() => accion(m.id, "rechazado", "Mensaje rechazado")}>
+                      <Button size="icon" variant="outline" title="Rechazar" onClick={() => accion(m.id, "rechazado", "Mensaje rechazado")}>
                         <X className="size-4" />
                       </Button>
-                      <Button size="sm" variant="outline" title="Revisión legal" onClick={() => accion(m.id, "revision_legal", "Marcado para revisión legal")}>
+                      <Button size="icon" variant="outline" title="Revisión legal" onClick={() => accion(m.id, "revision_legal", "Marcado para revisión legal")}>
                         <Scale className="size-4" />
                       </Button>
-                      <Button size="sm" variant="outline" title="Regenerar con IA" asChild>
+                      <Button size="icon" variant="outline" title="Regenerar con IA" asChild>
                         <Link to="/revision/$id" params={{ id: m.id }}><Sparkles className="size-4" /></Link>
                       </Button>
-                      <Button size="sm" variant="outline" title="Excluir de la campaña" onClick={() => accion(m.id, "excluido", "Cliente excluido de la campaña")}>
+                      <Button size="icon" variant="outline" title="Excluir de la campaña" onClick={() => accion(m.id, "excluido", "Cliente excluido de la campaña")}>
                         <Ban className="size-4" />
                       </Button>
-                      <Button size="sm" title="Enviar individualmente" onClick={() => enviar(m.id)}>
+                      <Button size="icon" title="Enviar individualmente" onClick={() => enviar(m.id)}>
                         <Send className="size-4" />
                       </Button>
                     </div>
