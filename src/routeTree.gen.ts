@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CampanasIndexRouteImport } from './routes/campanas.index'
+import { Route as CampanasNuevaRouteImport } from './routes/campanas.nueva'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const CampanasIndexRoute = CampanasIndexRouteImport.update({
   path: '/campanas/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CampanasNuevaRoute = CampanasNuevaRouteImport.update({
+  id: '/campanas/nueva',
+  path: '/campanas/nueva',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/campanas/nueva': typeof CampanasNuevaRoute
   '/campanas/': typeof CampanasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/campanas/nueva': typeof CampanasNuevaRoute
   '/campanas': typeof CampanasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/campanas/nueva': typeof CampanasNuevaRoute
   '/campanas/': typeof CampanasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/campanas/'
+  fullPaths: '/' | '/campanas/nueva' | '/campanas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/campanas'
-  id: '__root__' | '/' | '/campanas/'
+  to: '/' | '/campanas/nueva' | '/campanas'
+  id: '__root__' | '/' | '/campanas/nueva' | '/campanas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CampanasNuevaRoute: typeof CampanasNuevaRoute
   CampanasIndexRoute: typeof CampanasIndexRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampanasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/campanas/nueva': {
+      id: '/campanas/nueva'
+      path: '/campanas/nueva'
+      fullPath: '/campanas/nueva'
+      preLoaderRoute: typeof CampanasNuevaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CampanasNuevaRoute: CampanasNuevaRoute,
   CampanasIndexRoute: CampanasIndexRoute,
 }
 export const routeTree = rootRouteImport
